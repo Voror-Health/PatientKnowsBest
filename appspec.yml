@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: /source-file
+    destination: /target-folder
+
+hooks:
+  BeforeInstall:
+    - location: aws_scripts/cleanup
+      timeout: 300
+      runas: root

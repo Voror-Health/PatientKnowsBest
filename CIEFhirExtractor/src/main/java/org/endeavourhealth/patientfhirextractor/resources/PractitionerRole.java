@@ -1,0 +1,33 @@
+package org.endeavourhealth.patientfhirextractor.resources;
+
+import org.endeavourhealth.patientfhirextractor.models.PractitionerFull;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.UUID;
+import static org.endeavourhealth.patientfhirextractor.constants.ResourceConstants.PRACTITIONER_ROLE_SYSTEM;
+import static org.endeavourhealth.patientfhirextractor.constants.ResourceConstants.PRACTITIONER_ROLE_URL;
+
+public class PractitionerRole {
+    private static final Logger LOG = LoggerFactory.getLogger(PractitionerRole.class);
+
+    public static org.hl7.fhir.dstu3.model.PractitionerRole getPractitionerRoleResource(PractitionerFull practitionerResult) {
+        org.hl7.fhir.dstu3.model.PractitionerRole practitionerRole = new org.hl7.fhir.dstu3.model.PractitionerRole();
+
+        UUID uuid = UUID.randomUUID();
+        practitionerRole.setId(uuid.toString());
+
+        practitionerRole.getMeta().addProfile(PRACTITIONER_ROLE_URL);
+
+        CodeableConcept code = new CodeableConcept();
+        code.addCoding()
+                .setCode(practitionerResult.getRoleCode())
+                .setDisplay(practitionerResult.getRoleDesc())
+                .setSystem(PRACTITIONER_ROLE_SYSTEM);
+        practitionerRole.addCode(code);
+
+        return practitionerRole;
+    }
+
+
+}

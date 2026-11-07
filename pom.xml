@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.endeavourhealth</groupId>
+  <artifactId>PatientKnowsBest</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <node.version>v6.10.1</node.version>
+    <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+    <frontend-maven-plugin.version>1.4</frontend-maven-plugin.version>
+  </properties>
+
+  <modules>
+    <module>CIEFhirExtractor</module>
+    <module>scheduler</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>http://maven.endeavourhealth.net:8081/artifactory/libs-release</url>
+    </repository>
+    <repository>
+      <snapshots/>
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://maven.endeavourhealth.net:8081/artifactory/libs-snapshot</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>maven.endeavourhealth.org-snapshots</name>
+      <url>http://maven.endeavourhealth.net:8081/artifactory/libs-snapshot-local</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>

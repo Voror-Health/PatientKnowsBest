@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This web.xml file is not required when using Servlet 3.0 container,
+     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>cie_fhir_extractor</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>org.endeavourhealth.patientfhirextractor.endpoints</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cie_fhir_extractor</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>app_id</param-name>
+        <param-value>cie_fhir_extractor</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.endeavourhealth.coreui.framework.StartupConfig
+        </listener-class>
+    </listener>
+    <!-- set the class to provide keycloak.json -->
+    <context-param>
+        <param-name>keycloak.config.resolver</param-name>
+        <param-value>org.endeavourhealth.common.security.keycloak.KeycloakConfigResolverImpl</param-value>
+    </context-param>
+
+   <filter>
+        <filter-name>ExternalApiAccessFilter</filter-name>
+        <filter-class>org.endeavourhealth.coreui.framework.ExternalAPIAccessFilter</filter-class>
+        <init-param>
+            <param-name>app_name</param-name>
+            <param-value>cie-fhir-extractor</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExternalApiAccessFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>

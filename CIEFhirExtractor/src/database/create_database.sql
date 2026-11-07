@@ -1,0 +1,1 @@
+CREATE DATABASE cie_data_extract;
